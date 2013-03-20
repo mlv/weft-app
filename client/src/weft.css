@@ -1,0 +1,28 @@
+.post-wrapper, .parent-wrapper, .child-wrapper {
+  height: 100px;
+  border: 2px solid #cccccc;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+/*  margin: 10px; */
+/*  padding: 5px;*/
+}
+
+.small-post {
+  font-size: 80%;
+/*  margin-left: 40px; */
+/*  margin-right: 40px; */
+  overflow: hidden;
+}
+
+.center-post {
+  background-color: #f5f5f5;
+}
+
+.big-post {
+  height: 150px;
+}
+
+.no-border {
+  border: none;
+}

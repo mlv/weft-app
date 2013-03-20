@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Weft for app.net</title>
+  <script src="http://lib-storage.s3-website-us-east-1.amazonaws.com/jquery-1.8.2.min.js"></script>
+  <script src="http://lib-storage.s3-website-us-east-1.amazonaws.com/jquery.cookie.js"></script>
+  <link rel="stylesheet" style="text/css"
+        href="http://lib-storage.s3-website-us-east-1.amazonaws.com/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" style="text/css"
+        href="http://lib-storage.s3-website-us-east-1.amazonaws.com/bootstrap/css/bootstrap-responsive.min.css">
+  <script src="http://lib-storage.s3-website-us-east-1.amazonaws.com/bootstrap/js/bootstrap.min.js"></script>
+  <script>
+var clientId = "A989kdy4auUhD4xsxUVrNkvC7HehMA6T";
+
+function getHashParams() {
+  var hashParams = {};
+  var e,
+  a = /\+/g,  // Regex for replacing addition symbol with a space
+  r = /([^&;=]+)=?([^&;]*)/g,
+  d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
+  q = window.location.hash.substring(1);
+
+  while (e = r.exec(q))
+    hashParams[d(e[1])] = d(e[2]);
+
+  return hashParams;
+}
+
+    function initialize() {
+      $('#authorize-button').attr('href',"https://alpha.app.net/oauth/authenticate?client_id="+clientId+"&response_type=token&redirect_uri="+window.location.href+"&scope=write_post%20stream");
+
+      var hashParams = getHashParams();
+      var accessToken = hashParams['access_token'];
+      if (accessToken != null) {
+        // We have just authorized, redirect to previous URL
+        var prevUrl = $.cookie("weftPrevUrl");
+        if (prevUrl == null) {
+          prevUrl = "index.html";
+        }
+        localStorage['weftToken'] = accessToken;
+        $.removeCookie("weftPrevUrl", '/');
+        window.location = prevUrl;
+//        window.location.reload(true);
+      }
+    }
+
+    $(document).ready(initialize);
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div id="main" class="hero-unit">
+      <h1>Weft Authorization</h1>
+      <hr>
+      <p>Weft provides a different point of view on your app.net stream. It is a client for <a href="http://app.net" target="_blank">app.net</a> which is all about tying together conversational threads.</p>
+      <p><a id="authorize-button" class="btn btn-primary btn-large">Authorize Weft</a> to begin.</p>
+      <p>For troubleshooting, contact @duerig.</p>
+    </div>
+  </div>
+</body>
+</html>
