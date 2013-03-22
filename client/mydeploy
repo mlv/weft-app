@@ -1,0 +1,7 @@
+#!/bin/sh
+jshint --config=lint-config.js src/js/*.js && 
+node ../../resources/r.js -o src/build.js && \
+chmod -R og+r ../out/* * && \
+scp ../out/auth.html ../out/index.html ../out/weft.css /home/www/mlvezie/myweft &&
+scp ../out/js/weft.js /home/www/mlvezie/myweft/js
+
