@@ -108,24 +108,30 @@ function ($, appnet, allPosts, threader, PostList, Post)
   Stream.prototype.keyDown = function (event)
   {
     if (event.which === 87 || event.which === 38 || // w UP
-        event.which === 104)
+        event.which === 104 || event.which === 75)
     {
       this.up();
     }
     else if (event.which === 65 || event.which === 37 || // a LEFT
-             event.which === 188 || event.which === 100) // ,
+             event.which === 188 || event.which === 100 ||
+             event.which === 72) // ,
     {
       this.left();
     }
     else if (event.which === 83 || event.which === 40 || // s DOWN
-             event.which === 98)
+             event.which === 98 || event.which === 74)
     {
       this.down();
     }
     else if (event.which === 68 || event.which === 39 || // d RIGHT
-             event.which === 190 || event.which === 102) // .
+             event.which === 190 || event.which === 102 ||
+             event.which === 76) // .
     {
       this.right();
+    }
+    else
+    {
+      console.log( 'Got key: %d', event.which);
     }
   };
 
