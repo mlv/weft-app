@@ -12,6 +12,7 @@ function ($, appnet, allPosts, threader, PostList, Post)
 
   function Stream(type, root)
   {
+    console.log('In stream constructor, type: %s, root: %s\n', type, root);
     this.type = type;
     this.root = root;
     this.list = new PostList();
@@ -27,6 +28,7 @@ function ($, appnet, allPosts, threader, PostList, Post)
 
   Stream.prototype.update = function ()
   {
+    console.log('In stream.prototype.update');
     clearTimeout(this.timer);
     this.timer = setTimeout($.proxy(this.update, this), 30 * 1000);
     var options = {
@@ -44,6 +46,7 @@ function ($, appnet, allPosts, threader, PostList, Post)
 
   Stream.prototype.completeUpdate = function (response)
   {
+    console.log('In stream.prototype.completeUpdate');
     if (response.meta.max_id)
     {
       this.since = response.meta.max_id;
@@ -73,11 +76,13 @@ function ($, appnet, allPosts, threader, PostList, Post)
 
   Stream.prototype.failUpdate = function (response)
   {
+    console.log('In stream.prototype.failUpdate(%s)', response);
   };
 
   Stream.prototype.updateRender = function ()
   {
     var parent = null;
+    console.log('In stream.prototype.updateRender');
     if (this.ancestors.length > 0)
     {
       parent = this.ancestors[this.ancestors.length - 1].getCurrentPost();
@@ -107,6 +112,7 @@ function ($, appnet, allPosts, threader, PostList, Post)
 
   Stream.prototype.keyDown = function (event)
   {
+    console.log('\nKEY\n');
     if (event.which === 87 || event.which === 38 || // w UP
         event.which === 104 || event.which === 75)
     {
@@ -137,6 +143,7 @@ function ($, appnet, allPosts, threader, PostList, Post)
 
   Stream.prototype.down = function ()
   {
+    console.log('In stream.prototype.down, this: %s', this);
     this.center.moveNext();
     this.updateRender();
     var current = this.list.getCurrentPost();
@@ -148,6 +155,7 @@ function ($, appnet, allPosts, threader, PostList, Post)
 
   Stream.prototype.up = function ()
   {
+    console.log('In stream.prototype.up, this: %s', this);
     this.center.movePrevious();
     this.updateRender();
     var current = this.list.getCurrentPost();
@@ -159,6 +167,7 @@ function ($, appnet, allPosts, threader, PostList, Post)
 
   Stream.prototype.right = function ()
   {
+    console.log('In stream.prototype.right, this: %s', this);
     var current = this.center.getCurrentPost();
     if (current)
     {
@@ -174,6 +183,7 @@ function ($, appnet, allPosts, threader, PostList, Post)
 
   Stream.prototype.left = function ()
   {
+    console.log('In stream.prototype.left, this: %s', this);
     if (this.ancestors.length > 0)
     {
       this.center = this.ancestors.pop();

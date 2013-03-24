@@ -15,6 +15,7 @@ function ($, appnet, allPosts, Post) {
 
   threader.update = function ()
   {
+    console.log('in threader.update');
     clearTimeout(this.timer);
 //    this.timer = setTimeout($.proxy(this.update, this), 30 * 1000);
     if (this.thread)
@@ -38,6 +39,7 @@ function ($, appnet, allPosts, Post) {
 
   threader.completeUpdate = function (response)
   {
+    console.log('in threader.completeUpdate');
     var root = allPosts.get(this.thread);
     if (response.meta.max_id)
     {
@@ -74,6 +76,7 @@ function ($, appnet, allPosts, Post) {
 
   threader.changeThread = function (newThread, newStream)
   {
+    console.log('in threader.changeThread');
     this.stream = newStream;
     if (this.thread !== newThread)
     {

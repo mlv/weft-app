@@ -18,11 +18,13 @@ function ($, allPosts, postString) {
 
   PostList.prototype.addPost = function (post)
   {
+    console.log('In PostList.addPost, this: %s, post: %s', this, post);
     this.posts.push(post.id);
   };
 
   PostList.prototype.initCurrent = function ()
   {
+    console.log('In PostList.initCurrent, this: %s', this);
     if (this.current === null && this.posts.length > 0)
     {
       this.current = this.posts.length - 1;
@@ -31,6 +33,7 @@ function ($, allPosts, postString) {
 
   PostList.prototype.getCurrentPost = function ()
   {
+    console.log('In PostList.getCurrentPost, this: %s', this);
     this.initCurrent();
     var result = null;
     if (this.current !== null)
@@ -42,6 +45,7 @@ function ($, allPosts, postString) {
 
   PostList.prototype.moveNext = function ()
   {
+    console.log('In PostList.moveNext, this: %s', this);
     this.initCurrent();
     if (this.current !== null && this.current > 0)
     {
@@ -51,6 +55,7 @@ function ($, allPosts, postString) {
 
   PostList.prototype.movePrevious = function ()
   {
+    console.log('In PostList.movePrevious, this: %s', this);
     this.initCurrent();
     if (this.current !== null && this.current < this.posts.length - 1)
     {
@@ -60,6 +65,7 @@ function ($, allPosts, postString) {
 
   PostList.prototype.renderList = function (count, parent, child)
   {
+    console.log('In PostList.renderList(%d, %s, %s), this: %s', count, parent, child, this);
     this.initCurrent();
     var i = 0;
     var post;
@@ -84,6 +90,7 @@ function ($, allPosts, postString) {
 
   PostList.prototype.renderSmallPost = function (index)
   {
+    console.log('In PostList.renderSmallPost(%s), this: %s', index, this);
     var post = this.renderPost(index);
     post.find('.post-wrapper').addClass('small-post');
     post.find('.parent-wrapper').addClass('no-border');
@@ -93,6 +100,7 @@ function ($, allPosts, postString) {
 
   PostList.prototype.renderBigPost = function (index, parent, child)
   {
+    console.log('In PostList.renderBigPost(%d, %s, %s), this: %s', index, parent, child, this);
     var post = this.renderPost(index);
     var current = allPosts.get(this.posts[index]);
     if (current)
@@ -132,6 +140,7 @@ function ($, allPosts, postString) {
 
   PostList.prototype.renderPost = function (index)
   {
+    console.log('In PostList.renderPost(%d)', index);
     var post = postTemplate.clone();
     if (index >= 0 && index < this.posts.length)
     {
